@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'static#index'
 
   resources :attractions
-  resources :sessions
+  # resources :sessions
   resources :users
 
   # get '/signin', to: 'application#signin', as: 'signin'
