@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   get '/signin', to: 'sessions#signin', as: 'signin'
   # post   '/login',   to: 'sessions#create'
   post '/signin', to: 'sessions#create', as: 'create'
+  get '/sessions/delete', to: 'sessions#destroy'
   delete '/signout', to: 'sessions#destroy', as: 'destroy'
 end
