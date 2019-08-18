@@ -10,8 +10,8 @@ class AttractionsController < ApplicationController
 
   def create
     @attraction = Attraction.create(attraction_params)
-    message = @attraction.take_ride
-    redirect_to attraction_path(@attraction), flash: {message: message}
+
+    redirect_to attraction_path(@attraction)
   end
 
   def edit
