@@ -1,31 +1,39 @@
 class AttractionsController < ApplicationController
-  skip_before_action :user_verified, only: [:new, :create]
 
-  def new
-    @user = User.new
+  def index
+    @attractions = Attraction.all
   end
 
   def show
-    @user = User.find(params[:id])
+    @attraction = Attraction.find_by(id: params[:id])
+    @ride = @attraction.rides.build(user_id: current_user.id)
+  end
+
+  def new
+    @attraction = Attraction.new
   end
 
   def create
-    @user = User.new(user_params)
+    @attraction = Attraction.create(attraction_params)
 
-    if @user.save
-      session[:user_id] = @user.id
-      # redirect_to user_path(@user)
-      redirect_to @user
-    else
-      render :new
-    end
+    redirect_to attraction_path(@attraction)
+  end
 
+  def edit
+    @attraction = Attraction.find_by(id: params[:id])
+    @ride = @attraction.rides.build(user_id: current_user.id)
+  end
+
+  def update
+    @attraction = Attraction.find_by(id: params[:id])
+    @attraction.update(attraction_params)
+
+    redirect_to attraction_path(@attraction)
   end
 
   private
-
-  def user_params
-    params.require(:user).permit(:name, :password, :happiness, :nausea, :height, :tickets, :admin)
+  def attraction_params
+    params.require(:attraction).permit(:name, :min_height, :tickets, :happiness_rating, :nausea_rating)
   end
 
 end
