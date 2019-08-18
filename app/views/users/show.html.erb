@@ -17,7 +17,7 @@ Height: <%= @user.height %></br>
 Admin:
 <% if @user.admin %><%= 'ADMIN' %>
 <% end %><br>
+<%= link_to "Log Out", session_path, method:'delete' %>
 
-<%= link_to "Log Out", controller: 'sessions', action: 'destroy' %>
 <!-- might need a link_to "See Attractions, attractions_path -->
 <%= link_to "See attractions", attractions_path %><br>
